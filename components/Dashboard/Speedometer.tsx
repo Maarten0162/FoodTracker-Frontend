@@ -13,7 +13,7 @@ type SpeedometerProps = {
 };
 
 export default function Speedometer({
-  percentage = 75,
+  percentage = 0,
   color = "#ff6347",
   IconComponent,
   iconSize = 32,

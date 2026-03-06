@@ -9,20 +9,20 @@ import { StyleSheet, Text, View } from "react-native";
 
 
 export default function Index() {
-  const [food, setFood] = useState("");
+  const [UserGoals , setUserGoals] = useState([]);
 
   useEffect(() => {
-    const fetchFood = async () => {
+    const fetchUserGoals = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/food");
-        setFood(response.data);
-        console.log("data: " + food)
+        const response = await axios.get("http://localhost:8080/api/user/userstats");
+        setUserGoals(response.data);
+        console.log("data: " + response.data)
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchFood();
+    fetchUserGoals();
   }, []);
   return (
     <View
@@ -36,7 +36,6 @@ export default function Index() {
       <View style={styles.header}>
 
         <Text style={styles.dateText}>05/03/2026</Text>
-        <Text style={styles.dateText}>{food}</Text>
 
         <View style={[styles.streak, shadowStyle]}>
           <Flame style={styles.streakIcon} size={30} color="#FF6B6B"></Flame>
@@ -47,26 +46,26 @@ export default function Index() {
       {/* Cards */}
       <View style={[styles.Card, shadowStyle]}>
         <Text style={styles.CardTitle}>Calories</Text>
-        <Speedometer percentage={50} color="#5FA8D9" IconComponent={Zap} iconSize={80} strokeWidth={1.4} size={130} meterStrokeWidth={5.5}></Speedometer>
-        <Text style={styles.Cardtext}>1500 Kcal Left</Text>
+        <Speedometer percentage={0} color="#5FA8D9" IconComponent={Zap} iconSize={80} strokeWidth={1.4} size={130} meterStrokeWidth={5.5}></Speedometer>
+        <Text style={styles.Cardtext}>{UserGoals[0]} Kcal Left</Text>
       </View>
 
       <View style={styles.Card}>
         <Text style={styles.CardTitle}>Macronutrients</Text>
           <View style={styles.container}>
             <View>
-              <Speedometer percentage={50} color="#C95A5A" IconComponent={EggFried} iconSize={65} strokeWidth={1.4} size={110} meterStrokeWidth={5.5}></Speedometer>
-              <Text style={styles.Cardtext}>100g Left</Text>
+              <Speedometer percentage={0} color="#C95A5A" IconComponent={EggFried} iconSize={65} strokeWidth={1.4} size={110} meterStrokeWidth={5.5}></Speedometer>
+              <Text style={styles.Cardtext}>{UserGoals[1]}g Left</Text>
             </View>
 
             <View > 
-              <Speedometer percentage={50} color="#7CD962" IconComponent={Wheat} iconSize={60} strokeWidth={1.4} size={110} meterStrokeWidth={5.5}></Speedometer>
-              <Text style={styles.Cardtext}>100g Left</Text>
+              <Speedometer percentage={0} color="#7CD962" IconComponent={Wheat} iconSize={60} strokeWidth={1.4} size={110} meterStrokeWidth={5.5}></Speedometer>
+              <Text style={styles.Cardtext}>{UserGoals[2]}g Left</Text>
             </View>
 
             <View >
-              <Speedometer percentage={50} color="#D9C968" IconComponent={Droplet} iconSize={65} strokeWidth={1.4} size={110} meterStrokeWidth={5.5}></Speedometer>
-              <Text style={styles.Cardtext}>100g Left</Text>
+              <Speedometer percentage={0} color="#D9C968" IconComponent={Droplet} iconSize={65} strokeWidth={1.4} size={110} meterStrokeWidth={5.5}></Speedometer>
+              <Text style={styles.Cardtext}>{UserGoals[3]}g Left</Text>
             </View>
           </View>
         </View>
