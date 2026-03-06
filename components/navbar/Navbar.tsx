@@ -1,33 +1,46 @@
-import { View, Pressable, StyleSheet } from "react-native";
-import { router } from "expo-router";
-import { LayoutDashboard, Notebook, Plus, Dumbbell, SquareUserRound } from 'lucide-react-native';
+import { Href, router, usePathname } from "expo-router";
+import { Dumbbell, LayoutDashboard, Notebook, Plus, SquareUserRound } from 'lucide-react-native';
+import { Pressable, StyleSheet, View } from "react-native";
+
+
 
 export default function Navbar() {
+  const pathname = usePathname();
+
+  let inactiveColor = "#B0B0B0";
+  
+  function changePage(pageString: Href) {
+    if (pathname !== pageString) {
+      router.push(pageString);
+    }
+  }
+  
   return (
     <View style={styles.navbar}>
-      <Pressable onPress={() => router.push("/")}>
-        <LayoutDashboard strokeWidth={1.5} size={50} color="#B0B0B0"/>
+      <Pressable onPress={() => changePage("/")}>
+        <LayoutDashboard strokeWidth={1.5} size={50} color={pathname === "/" ? "#FF6B6B" : inactiveColor}/>
       </Pressable>
 
-      <Pressable onPress={() => router.push("/diary")}>
-        <Notebook strokeWidth={1.5} size={50} color="#B0B0B0"/>
+      <Pressable onPress={() => changePage("/diary")}>
+        <Notebook strokeWidth={1.5} size={50} color={pathname === "/diary" ? "#8CEB65" : inactiveColor}/>
       </Pressable>
 
       {/* Raised Add Button */}
-      <Pressable onPress={() => router.push("/add")} style={styles.addButton}>
-        <Plus strokeWidth={1.5} size={50} color="#B0B0B0"/>
+      <Pressable onPress={() => changePage("/add")} style={styles.addButton}>
+        <Plus strokeWidth={1.5} size={50} color={pathname === "/add" ? "#1ABC9C" : inactiveColor}/>
       </Pressable>
 
-      <Pressable onPress={() => router.push("/exercise")}>
-        <Dumbbell strokeWidth={1.5} size={50} color="#B0B0B0"/>
+      <Pressable onPress={() => changePage("/exercise")}>
+        <Dumbbell strokeWidth={1.5} size={50} color={pathname === "/exercise" ? "#2196F3" : inactiveColor}/>
       </Pressable>
 
-      <Pressable onPress={() => router.push("/profile")}>
-        <SquareUserRound strokeWidth={1.5} size={50} color="#B0B0B0"/>
+      <Pressable onPress={() => changePage("/profile")}>
+        <SquareUserRound strokeWidth={1.5} size={50} color={pathname === "/profile" ? "#B085F5" : inactiveColor}/>
       </Pressable>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   navbar: {

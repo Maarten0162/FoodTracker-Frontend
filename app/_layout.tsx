@@ -1,6 +1,4 @@
 import Navbar from "@/components/navbar/Navbar";
-import { Inter_400Regular, Inter_700Bold } from "@expo-google-fonts/inter";
-import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";

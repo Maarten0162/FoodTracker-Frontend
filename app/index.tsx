@@ -1,10 +1,29 @@
 import Speedometer from "@/components/Dashboard/Speedometer";
 import { shadowStyle } from "@/components/ShadowStyle";
+import axios from "axios";
 import { Droplet, EggFried, Flame, Wheat, Zap } from "lucide-react-native";
+import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 
+
+
 export default function Index() {
+  const [food, setFood] = useState("");
+
+  useEffect(() => {
+    const fetchFood = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/food");
+        setFood(response.data);
+        console.log("data: " + food)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchFood();
+  }, []);
   return (
     <View
       style={{
@@ -17,6 +36,7 @@ export default function Index() {
       <View style={styles.header}>
 
         <Text style={styles.dateText}>05/03/2026</Text>
+        <Text style={styles.dateText}>{food}</Text>
 
         <View style={[styles.streak, shadowStyle]}>
           <Flame style={styles.streakIcon} size={30} color="#FF6B6B"></Flame>
